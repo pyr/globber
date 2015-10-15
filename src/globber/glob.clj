@@ -352,7 +352,13 @@
     (case type
       :string     (filter (partial = (stringify-ast ast)) candidates)
       :explodable (filter (set (explode-ast ast)) candidates)
-      (let [partitions (if (sequential? ast)
+      (let [partitions (cond
+                         (sequential? ast)
                          (-> ast partition-compound-ast explode-compound-ast)
+
+                         (#{:ao :wc} ast)
+                         [[(list ast) nil]]
+
+                         :else
                          [[nil ast]])]
         (filter-compound-ast partitions candidates)))))

@@ -4,7 +4,7 @@ globber: globbing searches in clojure
 ### Installation
 
 ```clojure
-   [spootnik/globber "0.4.0"]
+   [spootnik/globber "0.4.1"]
 ```
 
 ### Usage
