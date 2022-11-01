@@ -181,9 +181,7 @@
    (let [factor (* (count left) (count right))]
      (cond (empty? left)  right
            (empty? right) left
-           :else          (map str
-                               (take factor (cycle left))
-                               (take factor (cycle right)))))))
+           :else          (for [l left r right] (str l r))))))
 
 (defn explode-ast
   "Explode a non-compound AST to all its possible combinations."
