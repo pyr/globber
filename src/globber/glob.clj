@@ -1,5 +1,6 @@
 (ns globber.glob
-  "Globbing searches in clojure.")
+  "Globbing searches in clojure."
+  (:require [clojure.string :as str]))
 
 (defn char->token
   "Our simple lexer, understands escaped characters."
@@ -244,10 +245,11 @@
   "Find all indices of a substring in a given string"
   [s pat]
   (loop [res nil
-         i   (.lastIndexOf s pat)]
+         i   (.lastIndexOf (str s) (str pat))]
     (cond (neg? i)  res
           (zero? i) (conj res i)
-          :else     (recur (conj res i) (.lastIndexOf s pat (dec i))))))
+          :else     (recur (conj res i)
+                           (.lastIndexOf (str s) (str pat) (long (dec i)))))))
 
 (defn find-pattern
   "Match a string against a list of eaters and a pattern"
@@ -267,7 +269,7 @@
    the new candidates this may have generated and if they
    are eligible as a terminal match."
   [[eaters patterns] [pos candidate]]
-  (let [s      (.substring candidate pos)
+  (let [s      (.substring (str candidate) (str pos))
         minpos (if eaters (count (filter #{:ao} eaters)) 0)
         wc?    (boolean (seq (filter #{:wc} eaters)))
         exact? (fn [i] (= i (count candidate)))]
