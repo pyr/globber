@@ -1,4 +1,4 @@
-(defproject spootnik/globber "0.4.2-SNAPSHOT"
+(defproject spootnik/globber "0.4.2"
   :description "globber: globbing searches in clojure"
   :url "https://github.com/pyr/globber"
   :license {:name "MIT License"}
