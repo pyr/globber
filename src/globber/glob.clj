@@ -222,7 +222,7 @@
                             (recur []
                                    []
                                    (conj partitions [(seq eaters) token])
-                                  tokens))
+                                   tokens))
       (#{:ao :wc} token)  (if (seq ast)
                             (recur [token]
                                    []
